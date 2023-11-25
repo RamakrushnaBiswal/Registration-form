@@ -37,7 +37,7 @@ app.post('/register', async (req, res) => {
         });
 
         await newUser.save();
-        res.sendFile(__dirname + './templates/home.html');
+        res.sendFile(__dirname + '/templates/home.html');
     } catch (error) {
         console.error(error);
         res.status(500).send('Error registering user.');
