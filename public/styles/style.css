@@ -9,6 +9,7 @@ body {
     background: url('/img/pexels-pixabay-235767.jpg');
     background-color: #252525;
     background-size: cover;
+    filter: contrast(100px, 100px, 100px);
 }
 img{
     width: 100px;

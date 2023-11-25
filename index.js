@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const bcrypt = require('bcryptjs');
+const { z } = require('zod');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -23,19 +25,26 @@ const userSchema = new mongoose.Schema({
 });
 
 const User = mongoose.model('User', userSchema);
-
+const registrationSchema = z.object({
+    username: z.string(),
+    email: z.string().email(),
+    password: z.string().min(8) // You can adjust the minimum password length
+});
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/templates/index.html');
 });
 
 app.post('/register', async (req, res) => {
     try {
-        const newUser = new User({
-            username: req.body.username,
-            email: req.body.email,
-            password: req.body.password
-        });
+        const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        const validatedData = registrationSchema.parse(req.body);
 
+        const newUser = new User({
+            username: validatedData.username,
+            email: validatedData.email,
+            password: validatedData.hashedPassword
+        });
+        console.log(newUser);
         await newUser.save();
         res.sendFile(__dirname + '/templates/home.html');
     } catch (error) {
