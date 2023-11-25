@@ -6,20 +6,26 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
+    background: url('/img/pexels-pixabay-235767.jpg');
     background-color: #252525;
+    background-size: cover;
 }
-
+img{
+    width: 100px;
+    padding-left: 105px;
+}
 .container {
-    background-color: #fff;
+    background:rgba(220, 216, 216, 0.717);
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    width: 350px;
+    width: 320px;
 }
 
 h2 {
     text-align: center;
-    color: #333;
+    color: #252525;
+    font-size: 35px;
 }
 
 form {
@@ -52,9 +58,11 @@ button:hover {
     background-color: #0056b3;
 }
 
-/* Responsive Design */
 @media (max-width: 480px) {
     .container {
         width: 100%;
     }
+}
+label{
+    color: #252525;
 }
