@@ -36,13 +36,13 @@ app.get('/', (req, res) => {
 
 app.post('/register', async (req, res) => {
     try {
-        const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        
         const validatedData = registrationSchema.parse(req.body);
-
+        const hashedPassword = await bcrypt.hash(validatedData.password, 10);
         const newUser = new User({
             username: validatedData.username,
             email: validatedData.email,
-            password: validatedData.hashedPassword
+            password:hashedPassword
         });
         console.log(newUser);
         await newUser.save();
@@ -52,7 +52,6 @@ app.post('/register', async (req, res) => {
         res.status(500).send('Error registering user.');
     }
 });
-
 
 app.listen(PORT, () => {
     console.log(`Server is running on ${PORT}`);
