@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema({
     password: String
 });
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model('users', userSchema);
 const registrationSchema = z.object({
     username: z.string(),
     email: z.string().email(),
