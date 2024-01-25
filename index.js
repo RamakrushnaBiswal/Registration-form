@@ -26,9 +26,9 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('users', userSchema);
 const registrationSchema = z.object({
-    username: z.string(),
+    username: z.string(5),
     email: z.string().email(),
-    password: z.string().min(8) // You can adjust the minimum password length
+    password: z.string().min(6)
 });
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/templates/index.html');
